@@ -7,18 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gallerymuslim.R
 import com.example.gallerymuslim.databinding.UserDetailsFragmentBinding
-import com.example.gallerymuslim.module.RegisterDatabase
-import com.example.gallerymuslim.register.RegisterRepository
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserDetailsFragment : Fragment() {
 
-    private lateinit var userDetailsViewModel: UserDetailsViewModel
+    private val userDetailsViewModel: UserDetailsViewModel by viewModels()
     private lateinit var binding: UserDetailsFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,15 +29,6 @@ class UserDetailsFragment : Fragment() {
             inflater,
             R.layout.user_details_fragment, container, false
         )
-
-        val application = requireNotNull(this.activity).application
-        val dao = RegisterDatabase.getInstance(application).registerDatabase
-        val repository = RegisterRepository(dao)
-        val factory = UserDetalisFactory(repository, application)
-
-        userDetailsViewModel =
-            ViewModelProvider(this, factory).get(UserDetailsViewModel::class.java)
-        binding.userDelailsLayout = userDetailsViewModel
         binding.lifecycleOwner = this
         userDetailsViewModel.navigateto.observe(viewLifecycleOwner, Observer { hasFinished ->
             if (hasFinished == true) {

@@ -1,15 +1,19 @@
 package com.example.gallerymuslim.userDetails
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.gallerymuslim.register.RegisterRepository
+import androidx.lifecycle.ViewModel
+import com.example.gallerymuslim.usecase.IHomeUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class UserDetailsViewModel (private val repository: RegisterRepository,application: Application):AndroidViewModel(application){
+@HiltViewModel
+class UserDetailsViewModel @Inject constructor(
+    private val iHomeUseCase: IHomeUseCase
+) : ViewModel() {
 
-    val users = repository.users
+    val users = iHomeUseCase.getAllUser()
     init {
         Log.i("MYTAG","inside_users_Lisrt_init")
     }

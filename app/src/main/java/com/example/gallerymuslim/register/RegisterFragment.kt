@@ -8,15 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
-import com.example.gallerymuslim.module.RegisterDatabase
 import com.example.gallerymuslim.R
 import com.example.gallerymuslim.databinding.FragmentRegisterBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
-    private lateinit var registerViewModel: RegisterVM
+    private val registerViewModel: RegisterVM by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +28,6 @@ class RegisterFragment : Fragment() {
             R.layout.fragment_register, container, false
         )
 
-        val application = requireNotNull(this.activity).application
-        val dao = RegisterDatabase.getInstance(application).registerDatabase
-        val repository = RegisterRepository(dao)
-        val factory = RegisterVMFactory(repository, application)
-
-        registerViewModel = ViewModelProvider(this, factory)[RegisterVM::class.java]
         binding.myViewModel = registerViewModel
         this.also { binding.lifecycleOwner = it }
         registerViewModel.navigateto.observe(viewLifecycleOwner) { hasFinished ->

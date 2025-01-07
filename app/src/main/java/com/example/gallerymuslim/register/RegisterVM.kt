@@ -1,22 +1,26 @@
 package com.example.gallerymuslim.register
 
-import android.app.Application
 import android.util.Log
 import androidx.databinding.Bindable
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gallerymuslim.entities.RegisterEntities
+import com.example.gallerymuslim.usecase.register.IRegisterUseCase
+import com.example.gallerymuslim.vo.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterVM(private var repository: RegisterRepository, application: Application) :
-AndroidViewModel(application), androidx.databinding.Observable {
+@HiltViewModel
+class RegisterVM @Inject constructor(
+    private val iRegisterUseCase: IRegisterUseCase
+) : ViewModel(), androidx.databinding.Observable {
 
-    private var userdata: String? = null
 
     var userDetailsLiveData = MutableLiveData<Array<RegisterEntities>>()
 
@@ -59,25 +63,39 @@ AndroidViewModel(application), androidx.databinding.Observable {
         } else {
             uiScope.launch {
 //            withContext(Dispatchers.IO) {
-                val usersNames = repository.getUserName(inputUsername.value!!)
-                Log.i("MYTAG", usersNames.toString() + "------------------")
-                if (usersNames != null) {
-                    _errorToastUsername.value = true
-                    Log.i("MYTAG", "Inside if Not null")
-                } else {
-                    Log.i("MYTAG", userDetailsLiveData.value.toString() + "ASDFASDFASDFASDF")
-                    Log.i("MYTAG", "OK im in")
-                    val firstName = inputFirstName.value!!
-                    val lastName = inputLastName.value!!
-                    val email = inputUsername.value!!
-                    val password = inputPassword.value!!
-                    Log.i("MYTAG", "insidi Sumbit")
-                    insert(RegisterEntities(0, firstName, lastName, email, password))
-                    inputFirstName.value = null
-                    inputLastName.value = null
-                    inputUsername.value = null
-                    inputPassword.value = null
-                    _navigateto.value = true
+                iRegisterUseCase.getUserName(inputUsername.value!!).collect {
+                    when (it) {
+                        is Resource.Success -> {
+                            Log.i("MYTAG", it.data?.userName.toString() + "------------------")
+                            if (it.data != null) {
+                                _errorToastUsername.value = true
+                                Log.i("MYTAG", "Inside if Not null")
+                            } else {
+                                Log.i("MYTAG", userDetailsLiveData.value.toString() + "ASDFASDFASDFASDF")
+                                Log.i("MYTAG", "OK im in")
+                                val firstName = inputFirstName.value!!
+                                val lastName = inputLastName.value!!
+                                val email = inputUsername.value!!
+                                val password = inputPassword.value!!
+                                Log.i("MYTAG", "insidi Sumbit")
+                                insert(
+                                    RegisterEntities(
+                                        firstName = firstName,
+                                        lastName = lastName,
+                                        userName = email,
+                                        password = password
+                                    )
+                                )
+                                inputFirstName.value = null
+                                inputLastName.value = null
+                                inputUsername.value = null
+                                inputPassword.value = null
+                                _navigateto.value = true
+                            }
+                        }
+
+                        else -> Unit
+                    }
                 }
             }
         }
@@ -104,7 +122,7 @@ AndroidViewModel(application), androidx.databinding.Observable {
     }
 
     private fun insert(user: RegisterEntities): Job = viewModelScope.launch {
-        repository.insert(user)
+        iRegisterUseCase.registerUser(user)
     }
 
     override fun removeOnPropertyChangedCallback(callback: androidx.databinding.Observable.OnPropertyChangedCallback) {

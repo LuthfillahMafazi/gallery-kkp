@@ -1,23 +1,26 @@
 package com.example.gallerymuslim.login
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.util.Log
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.gallerymuslim.register.RegisterRepository
+import androidx.lifecycle.ViewModel
+import com.example.gallerymuslim.usecase.login.ILoginUseCase
+import com.example.gallerymuslim.vo.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginVM(private val repository: RegisterRepository, application: Application) :
-    AndroidViewModel(application), Observable {
+@HiltViewModel
+class LoginVM @Inject constructor(
+    private val iLoginUseCase: ILoginUseCase
+) : ViewModel(), Observable {
 
-    val users = repository.users
 
     @Bindable
     val inputUsername = MutableLiveData<String>()
@@ -64,23 +67,29 @@ class LoginVM(private val repository: RegisterRepository, application: Applicati
             _errorToast.value = true
         } else {
             uiScope.launch {
-                val usersNames = repository.getUserName(inputUsername.value!!)
-                if (usersNames != null) {
-                    if(usersNames.password == inputPassword.value){
-                        inputUsername.value = null
-                        inputPassword.value = null
-                        _navigatetoUserDetails.value = true
-                    }else{
-                        _errorToastInvalidPassword.value = true
+                iLoginUseCase.getUserName(inputUsername.value ?: "").collect {
+                    when (it) {
+                        is Resource.Success -> {
+                            if (it.data != null) {
+                                if (it.data.password == inputPassword.value) {
+                                    inputUsername.value = null
+                                    inputPassword.value = null
+                                    _navigatetoUserDetails.value = true
+                                } else {
+                                    _errorToastInvalidPassword.value = true
+                                }
+                            } else {
+                                _errorToastUsername.value = true
+                            }
+
+                        }
+
+                        else -> Unit
                     }
-                } else {
-                    _errorToastUsername.value = true
                 }
             }
         }
     }
-
-
 
 
     fun doneNavigatingRegiter() {
@@ -99,15 +108,14 @@ class LoginVM(private val repository: RegisterRepository, application: Applicati
 
 
     fun donetoastErrorUsername() {
-        _errorToastUsername .value = false
+        _errorToastUsername.value = false
         Log.i("MYTAG", "Done taoasting ")
     }
 
     fun donetoastInvalidPassword() {
-        _errorToastInvalidPassword .value = false
+        _errorToastInvalidPassword.value = false
         Log.i("MYTAG", "Done taoasting ")
     }
-
 
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
