@@ -6,4 +6,18 @@
     </style>
 
     <style name="Theme.GalleryMuslim" parent="Base.Theme.GalleryMuslim" />
+
+    <style name="NameStyle">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="PlainTextStyle">
+        <item name="android:ems">10</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
 </resources>

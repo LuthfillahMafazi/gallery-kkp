@@ -3,8 +3,9 @@ package com.example.gallerymuslim.dao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.gallerymuslim.entities.GalleryEntities
+import com.example.gallerymuslim.entities.RegisterEntities
 
-@Database(entities = [GalleryEntities::class], version = 1)
+@Database(entities = [GalleryEntities::class, RegisterEntities::class], version = 1)
 abstract class GalleryRoomDatabase: RoomDatabase() {
 
     abstract fun galleryDao(): GalleryDao

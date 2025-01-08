@@ -1,12 +1,9 @@
-package com.example.gallerymuslim.repository
+package com.example.gallerymuslim.usecase.login
 
-import androidx.lifecycle.LiveData
 import com.example.gallerymuslim.entities.RegisterEntities
 import com.example.gallerymuslim.vo.Resource
 import kotlinx.coroutines.flow.Flow
 
-interface ILocaleRepository {
-    fun registerUser(registerEntities: RegisterEntities)
+interface ILoginUseCase {
     suspend fun getUserName(userName: String): Flow<Resource<RegisterEntities?>>
-    fun getAllUser(): LiveData<List<RegisterEntities>>
 }
