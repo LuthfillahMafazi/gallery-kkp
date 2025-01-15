@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="tab.font_black">
-        <item name="tabTextAppearance">@style/font_bold.14sp</item>
-        <item name="tabTextColor">@color/black60</item>
-        <item name="tabSelectedTextColor">@color/black</item>
-        <item name="tabRippleColor">@color/white50Percent</item>
-        <item name="android:background">@color/transparent</item>
-    </style>
+<!--    <style name="tab.font_black">-->
+<!--        <item name="tabTextAppearance">@style/font_bold.14sp</item>-->
+<!--        <item name="tabTextColor">@color/black60</item>-->
+<!--        <item name="tabSelectedTextColor">@color/black</item>-->
+<!--        <item name="tabRippleColor">@color/white50Percent</item>-->
+<!--        <item name="android:background">@color/transparent</item>-->
+<!--    </style>-->
 
-    <style name="font_bold.14sp">
-        <item name="android:textSize">14sp</item>
-    </style>
+<!--    <style name="font_bold.14sp">-->
+<!--        <item name="android:textSize">14sp</item>-->
+<!--    </style>-->
 </resources>

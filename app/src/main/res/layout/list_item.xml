@@ -29,7 +29,6 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/managemenetShopType"
-                style="@style/tab.font_black"
                 android:layout_width="match_parent"
                 android:layout_height="48dp" />
 

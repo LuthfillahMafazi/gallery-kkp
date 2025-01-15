@@ -29,9 +29,9 @@ class MyRecycleViewAdapter(private val usersList :List<RegisterEntities>):Recycl
 class MyviewHolder(private val binding :ListItemBinding ):RecyclerView.ViewHolder(binding.root){
 
     fun bind(user : RegisterEntities){
-        binding.FirstNameTextView.text = user.firstName
-        binding.secondNameTextView.text = user.lastName
-        binding.userTextField.text = user.userName
+//        binding.FirstNameTextView.text = user.firstName
+//        binding.secondNameTextView.text = user.lastName
+//        binding.userTextField.text = user.userName
     }
 
 }
