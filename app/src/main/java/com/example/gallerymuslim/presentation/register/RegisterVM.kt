@@ -1,4 +1,4 @@
-package com.example.gallerymuslim.register
+package com.example.gallerymuslim.presentation.register
 
 import android.util.Log
 import androidx.databinding.Bindable

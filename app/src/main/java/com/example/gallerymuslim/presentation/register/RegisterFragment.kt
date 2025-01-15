@@ -1,4 +1,4 @@
-package com.example.gallerymuslim.register
+package com.example.gallerymuslim.presentation.register
 
 import android.os.Bundle
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.example.gallerymuslim.login
+package com.example.gallerymuslim.presentation.login
 
 import android.annotation.SuppressLint
 import android.util.Log

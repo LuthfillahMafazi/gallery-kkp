@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.gallerymuslim.register.RegisterFragment">
+    tools:context="com.example.gallerymuslim.presentation.register.RegisterFragment">
 
     <data>
 
         <variable
             name="myViewModel"
-            type="com.example.gallerymuslim.register.RegisterVM" />
+            type="com.example.gallerymuslim.presentation.register.RegisterVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

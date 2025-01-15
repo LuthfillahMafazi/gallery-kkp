@@ -11,6 +11,16 @@
     <string name="UsernameTextField">Enter User Name</string>
     <string name="backButton">Back</string>
     <string name="Login_button">Login</string>
+    <string name="signupText">Sign Up!</string>
+
+    <string-array name="product_colors">
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Black</item>
+        <item>White</item>
+    </string-array>
     <string name="signUpBuyyer">Sign Up Buyyer</string>
     <string name="signUpSeller">Sign Up Seller</string>
 </resources>
