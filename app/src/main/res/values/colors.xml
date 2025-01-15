@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="darker_gray">#A9A9A9</color>
+    <color name="red">#FF5F70</color>
+    <color name="peach">#F5B686</color>
+    <color name="blue">#7198DD</color>
+    <color name="dark_blue">#3F51B5</color>
+    <color name="backgorund_green">#043637</color>
+
+
+    <color name="transparent">@android:color/transparent</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white10Percent">#19FFFFFF</color>
+    <color name="white20Percent">#33FFFFFF</color>
+    <color name="white40Percent">#66FFFFFF</color>
+    <color name="white50Percent">#7FFFFFFF</color>
+    <color name="black">#F5000000</color>
+    <color name="black80">#9E000000</color>
+    <color name="black60">#61000000</color>
+    <color name="black50">#FAFAFA</color>
+    <color name="black40">#1F000000</color>
+    <color name="black10Percent">#19000000</color>
+    <color name="black20Percent">#33000000</color>
+    <color name="black50Percent">#7F000000</color>
+    <color name="gray">#888B8D</color>
+    <color name="graySecondaryPercent60">#99C4C4C4</color>
 </resources>
