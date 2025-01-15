@@ -1,6 +1,7 @@
 package com.example.gallerymuslim.repository
 
 import androidx.lifecycle.LiveData
+import com.example.gallerymuslim.entities.GalleryEntities
 import com.example.gallerymuslim.entities.RegisterEntities
 import com.example.gallerymuslim.source.LocaleDataSource
 import com.example.gallerymuslim.vo.Resource
@@ -26,5 +27,31 @@ class LocaleRepositoryImpl @Inject constructor(
 
     override fun getAllUser(): LiveData<List<RegisterEntities>> {
         return localeDataSource.getAllUser()
+    }
+
+    override fun addProduct(galleryEntities: GalleryEntities) {
+        localeDataSource.addProduct(galleryEntities)
+    }
+
+    override suspend fun getAllProduct(): Flow<Resource<List<GalleryEntities>>> {
+        return flow {
+            emit(Resource.Loading())
+            localeDataSource.getAllProduct().collect {
+                emit(Resource.Success(it))
+            }
+        }
+    }
+
+    override suspend fun getDetailProduct(id: Int): Flow<Resource<GalleryEntities>> {
+        return flow {
+            emit(Resource.Loading())
+            localeDataSource.getDetailProduct(id).collect {
+                emit(Resource.Success(it))
+            }
+        }
+    }
+
+    override fun updateProduct(galleryEntities: GalleryEntities) {
+        localeDataSource.updateProduct(galleryEntities)
     }
 }

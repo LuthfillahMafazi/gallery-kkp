@@ -1,4 +1,4 @@
-package com.example.gallerymuslim.login
+package com.example.gallerymuslim.presentation.login
 
 import android.os.Bundle
 import android.util.Log
@@ -85,7 +85,7 @@ class LoginFragment : Fragment() {
 
     private fun navigateUserDetails() {
         Log.i("MYTAG","insidisplayUsersList")
-        val action = LoginFragmentDirections.actionLoginFragmentToUserDetailsFragment()
+        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment2()
         NavHostFragment.findNavController(this).navigate(action)
     }
 }
